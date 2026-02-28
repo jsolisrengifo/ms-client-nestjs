@@ -10,6 +10,11 @@ export class AppController {
     return this.appService.getHello();
   }
 
+  @Get('config')
+  getConfig() {
+    return this.appService.getConfig();
+  }
+
   @Get('clientes')
   getClientes(): Cliente[] {
     return this.appService.getClientes();

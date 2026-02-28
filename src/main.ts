@@ -3,13 +3,14 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  
-  // 1. Le decimos que use el puerto de OpenShift (8080)
-  const port = process.env.PORT || 8080;
-  
-  // 2. Agregamos '0.0.0.0' para aceptar tráfico desde el Service de OpenShift.
+
+  const port     = process.env.PORT     || 3000;
+  const appName  = process.env.APP_NAME || 'ms-client-default';
+  const appEnv   = process.env.APP_ENV  || 'local-default';
+
+  // '0.0.0.0' necesario para aceptar tráfico desde el Service de OpenShift
   await app.listen(port, '0.0.0.0');
-  
-  console.log(`Aplicación corriendo en el puerto: ${port}`);
+
+  console.log(`[${appName}] Ambiente: ${appEnv} | Puerto: ${port}`);
 }
 bootstrap();
